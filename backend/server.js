@@ -6,6 +6,8 @@ import workoutRouter from "./routes/workouts.js";
 const app = express();
 
 //middleware
+app.use(express.json()); // FOR ACCESSING THE BODY IN A POST REQUEST
+
 app.use((req, res, next) => {
     console.log(req.method, req.path);
     next();
