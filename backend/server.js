@@ -1,5 +1,6 @@
 import express from "express";
 import "dotenv/config";
+import workoutRouter from "./routes/workouts.js";
 
 //express app
 const app = express();
@@ -10,10 +11,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// test get request
-app.get("/", (req, res) => {
-    res.json({ message: "running successfully!" });
-});
+app.use("/api/workouts", workoutRouter);
 
 //express server
 app.listen(process.env.PORT, () => {
