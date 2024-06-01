@@ -1,4 +1,5 @@
 import express from "express";
+import { Workout } from "../models/WorkoutModel.js";
 
 const router = express.Router();
 
