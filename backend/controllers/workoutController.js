@@ -38,5 +38,40 @@ export const createWorkout = async (req, res) => {
 };
 
 // update a workout
+export const updateWorkout = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "workout not found" });
+    }
+
+    const workout = await Workout.findByIdAndUpdate(
+        { _id: id },
+        {
+            ...req.body,
+        }
+    );
+
+    if (!workout) {
+        return res.status(404).json({ error: "workout not found" });
+    }
+
+    res.status(200).json(workout);
+};
 
 // delete a workout
+export const deleteWorkout = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "workout not found" });
+    }
+
+    const workout = await Workout.findByIdAndDelete({ _id: id });
+
+    if (!workout) {
+        return res.status(404).json({ error: "workout not found" });
+    }
+
+    res.status(200).json(workout);
+};
