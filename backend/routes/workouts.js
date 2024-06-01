@@ -1,17 +1,17 @@
 import express from "express";
-import { createWorkout } from "../controllers/workoutController.js";
+import {
+    createWorkout,
+    getAllWorkouts,
+    getSingleWorkout,
+} from "../controllers/workoutController.js";
 
 const router = express.Router();
 
 //GET All workouts
-router.get("/", (req, res) => {
-    res.json({ msg: "GET All workouts" });
-});
+router.get("/", getAllWorkouts);
 
 //GET a single workout
-router.get("/:id", (req, res) => {
-    res.json({ msg: "GET a single workout" });
-});
+router.get("/:id", getSingleWorkout);
 
 //POST a workout
 router.post("/", createWorkout);
