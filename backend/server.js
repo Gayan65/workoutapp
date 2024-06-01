@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import "dotenv/config";
 import workoutRouter from "./routes/workouts.js";
 
@@ -15,7 +16,15 @@ app.use((req, res, next) => {
 
 app.use("/api/workouts", workoutRouter);
 
-//express server
-app.listen(process.env.PORT, () => {
-    console.log(`Backend server is running on PORT : ${process.env.PORT}`);
-});
+//mongodb connection
+mongoose
+    .connect(process.env.MONGO_URL)
+    .then(() => {
+        //express server
+        app.listen(process.env.PORT, () => {
+            console.log(
+                `DB Connected & Backend server is running on PORT : ${process.env.PORT}`
+            );
+        });
+    })
+    .catch((err) => console.log(err));
