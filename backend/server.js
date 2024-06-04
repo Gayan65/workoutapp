@@ -2,7 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
 import workoutRouter from "./routes/workouts.js";
-import { Workout } from "./models/WorkoutModel.js";
 
 //express app
 const app = express();
