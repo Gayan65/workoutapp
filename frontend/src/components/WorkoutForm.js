@@ -7,6 +7,7 @@ const WorkoutForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(title, load, reps);
     };
 
     return (
