@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import validator from "validator";
 
 const { Schema } = mongoose;
 
@@ -10,6 +11,18 @@ const userSchema = new Schema({
 
 //static signup method
 userSchema.statics.signup = async function (email, password) {
+    if (!email || !password) {
+        throw Error("Fields can not be blank!");
+    }
+
+    if (!validator.isEmail(email)) {
+        throw Error("Email is not valid!");
+    }
+
+    if (!validator.isStrongPassword(password)) {
+        throw Error("password is not strong!");
+    }
+
     const exists = await this.findOne({ email });
 
     if (exists) {
