@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
 import workoutRouter from "./routes/workouts.js";
+import userRouter from "./routes/user.js";
 
 //express app
 const app = express();
@@ -15,6 +16,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/workouts", workoutRouter);
+app.use("/api/user", userRouter);
 
 //mongodb connection
 mongoose
