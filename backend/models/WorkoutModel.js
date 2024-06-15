@@ -1,4 +1,4 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 
 //create schema
 const { Schema } = mongoose;
