@@ -12,7 +12,7 @@ const userSchema = new Schema({
 //static signup method
 userSchema.statics.signup = async function (email, password) {
     if (!email || !password) {
-        throw Error("Fields can not be blank!");
+        throw Error("Fields cannot be blank!");
     }
 
     if (!validator.isEmail(email)) {
@@ -33,6 +33,27 @@ userSchema.statics.signup = async function (email, password) {
     const hash = await bcrypt.hash(password, salt);
 
     const user = this.create({ email, password: hash });
+
+    return user;
+};
+
+//static login method
+userSchema.statics.login = async function (email, password) {
+    if (!email || !password) {
+        throw Error("Fields cannot be blank!");
+    }
+
+    const user = await this.findOne({ email });
+
+    if (!user) {
+        throw Error("Email not found!");
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+        throw Error("Invalid password!");
+    }
 
     return user;
 };
