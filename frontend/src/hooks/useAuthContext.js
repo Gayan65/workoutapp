@@ -10,5 +10,3 @@ export const useAuthContext = () => {
 
   return context;
 };
-
-//9
